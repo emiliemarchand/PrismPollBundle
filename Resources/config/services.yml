@@ -1,0 +1,7 @@
+parameters:
+#    prism_poll.example.class: Prism\PollBundle\Example
+
+services:
+#    prism_poll.example:
+#        class: %prism_poll.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]

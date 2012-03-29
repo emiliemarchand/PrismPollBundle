@@ -1,3 +1,0 @@
-PrismPollBundle_homepage:
-    pattern:  /hello/{name}
-    defaults: { _controller: PrismPollBundle:Default:index }

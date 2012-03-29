@@ -1,0 +1,24 @@
+Prism\PollBundle\Entity\BaseChoice:
+  type: mappedSuperclass
+  fields:
+    id:
+      type: integer
+      id: true
+      generator:
+        strategy: AUTO
+    name:
+      type: string
+      length: 255
+      nullable: false
+    votes:
+      type: integer
+      default: 0
+    ordering:
+      type: integer
+    createdAt:
+      type: datetime
+    updatedAt:
+      type: datetime
+  lifecycleCallbacks:
+    prePersist: [ prePersist ]
+    preUpdate: [ preUpdate ]

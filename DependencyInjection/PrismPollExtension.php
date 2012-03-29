@@ -24,5 +24,26 @@ class PrismPollExtension extends Extension
 
         $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.yml');
+
+        $container->setParameter('prism_poll.poll_entity', $config['entity']['poll']);
+        $container->setParameter('prism_poll.choice_entity', $config['entity']['choice']);
+
+        $associations = array(
+            'Prism\PollBundle\Entity\BaseChoice' => array(
+                'manyToOne' => array(
+                    'fieldName' => 'poll',
+                    'targetEntity' => $config['entity']['poll'],
+                    'joinColumns' => array(
+                        array(
+                            'name' => 'pollId',
+                            'referencedColumnName' => 'id',
+                            'onDelete' => 'cascade'
+                        )
+                    )
+                )
+            )
+        );
+
+        $container->setParameter('prism_poll.association_mapping', $associations);
     }
 }

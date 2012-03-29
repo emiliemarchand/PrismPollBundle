@@ -1,7 +1,10 @@
 parameters:
-#    prism_poll.example.class: Prism\PollBundle\Example
+  prism_poll.post_load_listener.class: Prism\PollBundle\Listener\LoadClassMetadataListener
 
 services:
-#    prism_poll.example:
-#        class: %prism_poll.example.class%
-#        arguments: [@service_id, "plain_value", %parameter%]
+    prism_poll.load_class_metadata:
+        class: %prism_poll.post_load_listener.class%
+        tags:
+            - { name: doctrine.event_listener, event: loadClassMetadata }
+        calls:
+            - [ setContainer, [ @service_container ] ]

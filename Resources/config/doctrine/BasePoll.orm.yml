@@ -1,0 +1,33 @@
+Prism\PollBundle\Entity\BasePoll:
+  type: mappedSuperclass
+  fields:
+    id:
+      type: integer
+      id: true
+      generator:
+        strategy: AUTO
+    name:
+      type: string
+      length: 255
+      nullable: false
+    slug:
+      type: string
+      length: 255
+      nullable: false
+    published:
+      type: boolean
+    closed:
+      type: boolean
+    createdAt:
+      type: datetime
+    updatedAt:
+      type: datetime
+  lifecycleCallbacks:
+    prePersist: [ prePersist ]
+    preUpdate: [ preUpdate ]
+#  oneToMany:
+#    choices:
+#      targetEntity: Prism\PollBundle\Entity\BaseChoice
+#      mappedBy: poll
+#      orderBy:
+#        ordering: ASC

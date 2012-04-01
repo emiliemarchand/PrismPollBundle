@@ -10,24 +10,27 @@ Prism\PollBundle\Entity\BasePoll:
       type: string
       length: 255
       nullable: false
+      gedmo:
+        - sluggable
     slug:
       type: string
       length: 255
       nullable: false
+      gedmo:
+        slug:
+          fields: [name]
+          separator: -
     published:
       type: boolean
     closed:
       type: boolean
     createdAt:
       type: datetime
+      gedmo:
+        timestampable:
+          on: create
     updatedAt:
       type: datetime
-  lifecycleCallbacks:
-    prePersist: [ prePersist ]
-    preUpdate: [ preUpdate ]
-#  oneToMany:
-#    choices:
-#      targetEntity: Prism\PollBundle\Entity\BaseChoice
-#      mappedBy: poll
-#      orderBy:
-#        ordering: ASC
+      gedmo:
+        timestampable:
+          on: update

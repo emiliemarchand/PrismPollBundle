@@ -1,3 +1,7 @@
 PrismPollBundle_backend_poll_list:
     pattern:  /list
     defaults: { _controller: PrismPollBundle:Backend\Poll:list }
+
+PrismPollBundle_backend_poll_edit:
+    pattern:  /edit/{pollId}
+    defaults: { _controller: PrismPollBundle:Backend\Poll:edit, pollId: 0 }

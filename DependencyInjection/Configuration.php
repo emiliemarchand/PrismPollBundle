@@ -26,8 +26,8 @@ class Configuration implements ConfigurationInterface
                 ->arrayNode('entity')
                     ->addDefaultsIfNotSet()
                     ->children()
-                        ->scalarNode('poll')->defaultValue('Application\Prism\PollBundle\Entity\Poll')->end()
-                        ->scalarNode('choice')->defaultValue('Application\Prism\PollBundle\Entity\Choice')->end()
+                        ->scalarNode('poll')->defaultValue('Prism\PollBundle\Entity\Poll')->end()
+                        ->scalarNode('opinion')->defaultValue('Prism\PollBundle\Entity\Opinion')->end()
                     ->end()
                 ->end()
             ->end();

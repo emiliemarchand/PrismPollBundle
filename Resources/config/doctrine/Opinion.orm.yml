@@ -1,0 +1,3 @@
+Prism\PollBundle\Entity\Opinion:
+  type: entity
+  table: PrismPollOpinion

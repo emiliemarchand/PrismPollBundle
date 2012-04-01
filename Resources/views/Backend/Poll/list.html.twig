@@ -1,1 +1,15 @@
-<h1>Polls List</h1>
+{% extends 'PrismPollBundle:Backend:layout.html.twig' %}
+
+{% block content %}
+    <h1>Polls List</h1>
+
+    <a href="{{ path('PrismPollBundle_backend_poll_edit') }}">New Poll</a>
+
+    <ul id="polls">
+        {% for poll in polls %}
+            <li>
+                <a href="{{ path('PrismPollBundle_backend_poll_edit', { pollId: poll.id }) }}">{{ poll }}</a>
+            </li>
+        {% endfor %}
+    </ul>
+{% endblock %}

@@ -33,15 +33,28 @@ abstract class BasePoll
     protected $closed;
 
     /**
-     * @var datetime $createdAt
+     * @var \Datetime $createdAt
      */
     protected $createdAt;
 
     /**
-     * @var datetime $updatedAt
+     * @var \Datetime $updatedAt
      */
     protected $updatedAt;
 
+    /**
+     * @var \Prism\PollBundle\Entity\Opinion
+     */
+    protected $opinions;
+
+
+    /**
+     * __construct()
+     */
+    public function __construct()
+    {
+        $this->opinions = new \Doctrine\Common\Collections\ArrayCollection();
+    }
 
     /**
      * Get id
@@ -136,7 +149,7 @@ abstract class BasePoll
     /**
      * Set createdAt
      *
-     * @param datetime $createdAt
+     * @param \Datetime $createdAt
      */
     public function setCreatedAt($createdAt)
     {
@@ -146,7 +159,7 @@ abstract class BasePoll
     /**
      * Get createdAt
      *
-     * @return datetime 
+     * @return \Datetime
      */
     public function getCreatedAt()
     {
@@ -156,7 +169,7 @@ abstract class BasePoll
     /**
      * Set updatedAt
      *
-     * @param datetime $updatedAt
+     * @param \Datetime $updatedAt
      */
     public function setUpdatedAt($updatedAt)
     {
@@ -166,24 +179,56 @@ abstract class BasePoll
     /**
      * Get updatedAt
      *
-     * @return datetime 
+     * @return \Datetime
      */
     public function getUpdatedAt()
     {
         return $this->updatedAt;
     }
-    
+
     /**
-     * @ORM\prePersist
+     * Add opinions
+     *
+     * @param \Prism\PollBundle\Entity\Opinion $opinions
      */
-    public function prePersist()
+    public function addOpinion(\Prism\PollBundle\Entity\Opinion $opinions)
     {
+        $this->opinions[] = $opinions;
     }
 
     /**
-     * @ORM\preUpdate
+     * Get opinions
+     *
+     * @return \Doctrine\Common\Collections\Collection
      */
-    public function preUpdate()
+    public function getOpinions()
     {
+        return $this->opinions;
+    }
+
+    /**
+     * Set opinions
+     *
+     * @param \Doctrine\Common\Collections\Collection $opinions
+     */
+    public function setOpinions(\Doctrine\Common\Collections\Collection $opinions)
+    {
+        foreach ($opinions as $opinion) {
+            $opinion->setPoll($this);
+        }
+
+        $this->opinions = $opinions;
+    }
+
+    /**
+     * @return string
+     */
+    public function __toString()
+    {
+        if ($this->name) {
+            return $this->name;
+        }
+
+        return 'New Poll';
     }
 }

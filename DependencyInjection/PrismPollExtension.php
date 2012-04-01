@@ -26,10 +26,10 @@ class PrismPollExtension extends Extension
         $loader->load('services.yml');
 
         $container->setParameter('prism_poll.poll_entity', $config['entity']['poll']);
-        $container->setParameter('prism_poll.choice_entity', $config['entity']['choice']);
+        $container->setParameter('prism_poll.opinion_entity', $config['entity']['opinion']);
 
         $associations = array(
-            'Prism\PollBundle\Entity\BaseChoice' => array(
+            'Prism\PollBundle\Entity\BaseOpinion' => array(
                 'manyToOne' => array(
                     'fieldName' => 'poll',
                     'targetEntity' => $config['entity']['poll'],
@@ -39,6 +39,21 @@ class PrismPollExtension extends Extension
                             'referencedColumnName' => 'id',
                             'onDelete' => 'cascade'
                         )
+                    )
+                )
+            ),
+
+            $config['entity']['poll'] => array( // OneToMany association cannot be set on a mapped superclass
+                'oneToMany' => array(
+                    'fieldName' => 'opinions',
+                    'targetEntity' => $config['entity']['opinion'],
+                    'mappedBy' => 'poll',
+                    'cascade' => array(
+                        1 => 'persist'
+                    ),
+                    'orphanRemoval' => true,
+                    'orderBy' => array(
+                        'ordering' => 'ASC'
                     )
                 )
             )

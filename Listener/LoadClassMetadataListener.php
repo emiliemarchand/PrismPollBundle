@@ -14,7 +14,7 @@ class LoadClassMetadataListener
     /**
      * LoadClassMetadata
      *
-     * @param \Doctrine\ORM\Event\LifecycleEventArgs $args Arguments
+     * @param LoadClassMetadataEventArgs $eventArgs
      */
     public function loadClassMetadata(LoadClassMetadataEventArgs $eventArgs)
     {

@@ -3,9 +3,9 @@
 namespace Prism\PollBundle\Entity;
 
 /**
- * Prism\PollBundle\Entity\BaseChoice
+ * Prism\PollBundle\Entity\BaseOpinion
  */
-abstract class BaseChoice
+abstract class BaseOpinion
 {
     /**
      * @var integer $id
@@ -28,19 +28,20 @@ abstract class BaseChoice
     protected $ordering;
 
     /**
-     * @var datetime $createdAt
+     * @var \Datetime $createdAt
      */
     protected $createdAt;
 
     /**
-     * @var datetime $updatedAt
+     * @var \Datetime $updatedAt
      */
     protected $updatedAt;
 
     /**
-     * @var Application\Prism\PollBundle\Entity\Choice
+     * @var \Prism\PollBundle\Entity\Poll
      */
-    protected $poll;
+    protected  $poll;
+
 
     /**
      * Get id
@@ -115,7 +116,7 @@ abstract class BaseChoice
     /**
      * Set createdAt
      *
-     * @param datetime $createdAt
+     * @param \Datetime $createdAt
      */
     public function setCreatedAt($createdAt)
     {
@@ -125,7 +126,7 @@ abstract class BaseChoice
     /**
      * Get createdAt
      *
-     * @return datetime 
+     * @return \Datetime
      */
     public function getCreatedAt()
     {
@@ -135,7 +136,7 @@ abstract class BaseChoice
     /**
      * Set updatedAt
      *
-     * @param datetime $updatedAt
+     * @param \Datetime $updatedAt
      */
     public function setUpdatedAt($updatedAt)
     {
@@ -145,7 +146,7 @@ abstract class BaseChoice
     /**
      * Get updatedAt
      *
-     * @return datetime 
+     * @return \Datetime
      */
     public function getUpdatedAt()
     {
@@ -155,9 +156,9 @@ abstract class BaseChoice
     /**
      * Set poll
      *
-     * @param Application\Prism\PollBundle\Entity\Poll $poll
+     * @param \Prism\PollBundle\Entity\Poll $poll
      */
-    public function setPoll(\Application\Prism\PollBundle\Entity\Poll $poll)
+    public function setPoll(\Prism\PollBundle\Entity\Poll $poll)
     {
         $this->poll = $poll;
     }
@@ -165,7 +166,7 @@ abstract class BaseChoice
     /**
      * Get poll
      *
-     * @return Application\Prism\PollBundle\Entity\Poll 
+     * @return \Prism\PollBundle\Entity\Poll
      */
     public function getPoll()
     {
@@ -173,18 +174,14 @@ abstract class BaseChoice
     }
 
     /**
-     * @ORM\prePersist
+     * @return string
      */
-    public function prePersist()
+    public function __toString()
     {
+        if ($this->id) {
+            return $this->name;
+        }
 
-    }
-
-    /**
-     * @ORM\preUpdate
-     */
-    public function preUpdate()
-    {
-
+        return 'New Choice';
     }
 }

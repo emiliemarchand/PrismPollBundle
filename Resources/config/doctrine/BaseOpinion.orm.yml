@@ -1,4 +1,4 @@
-Prism\PollBundle\Entity\BaseChoice:
+Prism\PollBundle\Entity\BaseOpinion:
   type: mappedSuperclass
   fields:
     id:
@@ -12,13 +12,17 @@ Prism\PollBundle\Entity\BaseChoice:
       nullable: false
     votes:
       type: integer
-      default: 0
+      nullable: true
     ordering:
       type: integer
+      nullable: true
     createdAt:
       type: datetime
+      gedmo:
+        timestampable:
+          on: create
     updatedAt:
       type: datetime
-  lifecycleCallbacks:
-    prePersist: [ prePersist ]
-    preUpdate: [ preUpdate ]
+      gedmo:
+        timestampable:
+          on: update

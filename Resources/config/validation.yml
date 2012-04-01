@@ -1,0 +1,9 @@
+Prism\PollBundle\Entity\BasePoll:
+    properties:
+        name:
+            - NotBlank: ~
+
+Prism\PollBundle\Entity\BaseOpinion:
+    properties:
+        name:
+            - NotBlank: ~

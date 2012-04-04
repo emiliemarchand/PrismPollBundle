@@ -23,7 +23,7 @@ class PollType extends AbstractType
             ->add('published')
             ->add('closed')
             ->add('opinions', 'collection', array(
-                'type' => new OpinionType(),
+                'type' => new $options['opinion_form'],
                 'allow_add' => true,
                 'allow_delete' => true,
                 'by_reference' => false
@@ -38,5 +38,19 @@ class PollType extends AbstractType
     public function getName()
     {
         return 'poll';
+    }
+
+    /**
+     * Get Default Options
+     *
+     * @param array $options
+     *
+     * @return array
+     */
+    public function getDefaultOptions(array $options)
+    {
+        return array(
+            'opinion_form' => 'Prism\PollBundle\Form\OpinionType',
+        );
     }
 }

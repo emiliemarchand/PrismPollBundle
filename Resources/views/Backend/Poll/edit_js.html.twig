@@ -1,0 +1,23 @@
+<script type="text/javascript">
+    $('a#add_choice').click(function(e){
+        e.preventDefault();
+        addChoiceForm();
+    });
+
+    $('a.delete_choice').live('click', function(e) {
+        e.preventDefault();
+        $(this).parent().remove();
+    });
+
+    function addChoiceForm() {
+        var collectionHolder = $('ul#opinions');
+        var prototype = collectionHolder.attr('data-prototype');
+
+        // Replace '$$name$$' in the prototype's HTML to instead be a number based on the current collection's length.
+        var newForm = prototype.replace(/\$\$name\$\$/g, collectionHolder.children().length);
+
+        var newFormLi = $('<li></li>').append(newForm);
+        newFormLi.append('<a href="#" class="delete_choice">Delete this choice</a>');
+        collectionHolder.append(newFormLi);
+    }
+</script>

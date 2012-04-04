@@ -10,13 +10,26 @@ use Prism\PollBundle\Form\PollType;
 class PollController extends Controller
 {
     /**
+     * Init
+     */
+    public function init()
+    {
+        $this->pollEntity = $this->container->getParameter('prism_poll.poll_entity');
+        $this->pollEntityRepository = $this->getDoctrine()->getEntityManager()->getRepository($this->pollEntity);
+        $this->pollForm = $this->container->getParameter('prism_poll.poll_form');
+        $this->opinionForm = $this->container->getParameter('prism_poll.opinion_form');
+    }
+
+    /**
      * List all polls
      *
      * @return Response
      */
     public function listAction()
     {
-        $polls = $this->getDoctrine()->getEntityManager()->getRepository('PrismPollBundle:Poll')->findAll();
+        $this->init(); // TODO: create a controller listener to call it automatically
+
+        $polls = $this->pollEntityRepository->findAll();
 
         return $this->render('PrismPollBundle:Backend\Poll:list.html.twig', array(
             'polls' => $polls
@@ -32,22 +45,22 @@ class PollController extends Controller
      */
     public function editAction($pollId)
     {
-        $em = $this->getDoctrine()->getEntityManager();
+        $this->init();
 
-        $poll = $em->getRepository('PrismPollBundle:Poll')->find($pollId);
+        $poll = $this->pollEntityRepository->find($pollId);
 
         if (!$poll) {
-            $this->pollEntity = $this->container->getParameter('prism_poll.poll_entity');
             $poll = new $this->pollEntity;
         }
 
-        $form = $this->createForm(new PollType(), $poll);
+        $form = $this->createForm(new $this->pollForm, $poll, array('opinion_form' => $this->opinionForm));
 
         if ('POST' == $this->getRequest()->getMethod()) {
 
             $form->bindRequest($this->getRequest());
 
             if ($form->isValid()) {
+                $em = $this->getDoctrine()->getEntityManager();
                 $em->persist($poll);
                 $em->flush();
             }

@@ -30,6 +30,14 @@ class Configuration implements ConfigurationInterface
                         ->scalarNode('opinion')->defaultValue('Prism\PollBundle\Entity\Opinion')->end()
                     ->end()
                 ->end()
+
+                ->arrayNode('form')
+                    ->addDefaultsIfNotSet()
+                    ->children()
+                        ->scalarNode('poll')->defaultValue('Prism\PollBundle\Form\PollType')->end()
+                        ->scalarNode('opinion')->defaultValue('Prism\PollBundle\Form\OpinionType')->end()
+                    ->end()
+                ->end()
             ->end();
 
         return $treeBuilder;

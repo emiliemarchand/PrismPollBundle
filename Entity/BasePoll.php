@@ -189,9 +189,9 @@ abstract class BasePoll
     /**
      * Add opinions
      *
-     * @param \Prism\PollBundle\Entity\Opinion $opinions
+     * @param \Prism\PollBundle\Entity\BaseOpinion $opinions
      */
-    public function addOpinion(\Prism\PollBundle\Entity\Opinion $opinions)
+    public function addOpinion(\Prism\PollBundle\Entity\BaseOpinion $opinions)
     {
         $this->opinions[] = $opinions;
     }

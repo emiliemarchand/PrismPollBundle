@@ -28,6 +28,9 @@ class PrismPollExtension extends Extension
         $container->setParameter('prism_poll.poll_entity', $config['entity']['poll']);
         $container->setParameter('prism_poll.opinion_entity', $config['entity']['opinion']);
 
+        $container->setParameter('prism_poll.poll_form', $config['form']['poll']);
+        $container->setParameter('prism_poll.opinion_form', $config['form']['opinion']);
+
         $associations = array(
             'Prism\PollBundle\Entity\BaseOpinion' => array(
                 'manyToOne' => array(

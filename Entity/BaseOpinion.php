@@ -156,9 +156,9 @@ abstract class BaseOpinion
     /**
      * Set poll
      *
-     * @param \Prism\PollBundle\Entity\Poll $poll
+     * @param \Prism\PollBundle\Entity\BasePoll $poll
      */
-    public function setPoll(\Prism\PollBundle\Entity\Poll $poll)
+    public function setPoll(\Prism\PollBundle\Entity\BasePoll $poll)
     {
         $this->poll = $poll;
     }
@@ -166,7 +166,7 @@ abstract class BaseOpinion
     /**
      * Get poll
      *
-     * @return \Prism\PollBundle\Entity\Poll
+     * @return \Prism\PollBundle\Entity\BasePoll
      */
     public function getPoll()
     {

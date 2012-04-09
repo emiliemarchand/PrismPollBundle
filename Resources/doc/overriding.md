@@ -57,7 +57,6 @@ You only need to specify your custom fields. Do NOT repeat the fields and associ
 
 ``` yaml
 # app/config/config.yml
-
 prism_poll:
     entity:
         poll:     Application\Prism\PollBundle\Entity\Poll
@@ -264,7 +263,6 @@ class OpinionType extends BaseOpinionType
 
 ``` yaml
 # app/config/config.yml
-
 prism_poll:
     form:
         poll:     Application\Prism\PollBundle\Form\PollType

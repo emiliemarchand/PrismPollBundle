@@ -1,5 +1,4 @@
-A simple poll bundle for symfony2
-Currently under development, not usable
+A simple poll bundle for symfony2. Currently under development, not usable
 
 ## Installation
 
@@ -11,7 +10,7 @@ Currently under development, not usable
     target=/bundles/Prism/PollBundle
 ```
 
-You will also need to add DoctrineExtensions for the timestamppable et sluggable features:
+You will also need to add DoctrineExtensions for the timestampable and sluggable features:
 
 ``` ini
 [gedmo-doctrine-extensions]
@@ -62,7 +61,6 @@ public function registerBundles()
 
 ``` yaml
 # app/config/routing.yml
-
 PrismPollBundle_backend:
     prefix: /poll/backend
     resource: "@PrismPollBundle/Resources/config/routing/backend.yml"
@@ -73,7 +71,6 @@ PrismPollBundle_backend:
 
 ``` yaml
 # app/config/config.yml
-
 stof_doctrine_extensions:
     orm:
         default:
@@ -81,7 +78,7 @@ stof_doctrine_extensions:
             sluggable: true
 ```
 
-### Add the tables
+### Generate the tables
 
 ``` bash
 $ app/console doctrine:schema:update --force
@@ -92,4 +89,4 @@ This will create the PrismPoll and PrismPollOpinion tables
 
 ## Overriding the bundle
 
-See the [documentation](https://github.com/FriendsOfSymfony/FOSUserBundle/blob/master/Resources/doc/index.md)
+See the [documentation](https://github.com/emiliemarchand/PrismPollBundle/blob/master/Resources/doc/overriding.md)

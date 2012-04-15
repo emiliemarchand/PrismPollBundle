@@ -1,15 +1,63 @@
 {% extends 'PrismPollBundle:Backend:layout.html.twig' %}
 
 {% block content %}
-    <h1>Polls List</h1>
+    <div id="polls_list">
 
-    <a href="{{ path('PrismPollBundle_backend_poll_edit') }}">New Poll</a>
+        <h1>Polls List</h1>
 
-    <ul id="polls">
-        {% for poll in polls %}
-            <li>
-                <a href="{{ path('PrismPollBundle_backend_poll_edit', { pollId: poll.id }) }}">{{ poll }}</a>
-            </li>
-        {% endfor %}
-    </ul>
+        <a href="{{ path('PrismPollBundle_backend_poll_edit') }}" id="add_new">+ New Poll</a>
+
+        {% if app.session.getFlash('success') %}
+            <div id="success">
+                {{ app.session.getFlash('success') }}
+            </div>
+        {% endif %}
+
+        <table id="polls" cellspacing="0">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Nb. of votes</th>
+                    <th class="boolean">Published</th>
+                    <th class="boolean">Closed</th>
+                    <th class="delete">Delete</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for poll in polls %}
+                    <tr>
+                        <th>
+                            <a href="{{ path('PrismPollBundle_backend_poll_edit', { pollId: poll.id }) }}">{{ poll }}</a>
+                        </th>
+                        <td>
+                            TODO
+                        </td>
+                        <td class="boolean">
+                            {% if poll.published %}
+                                <img src="{{ asset('bundles/prismpoll/images/tick.png') }}" width="12" height="10" alt="Published" />
+                            {% else %}
+                                &nbsp;
+                            {% endif %}
+                        </td>
+                        <td class="boolean">
+                            {% if poll.closed %}
+                                <img src="{{ asset('bundles/prismpoll/images/tick.png') }}" width="12" height="10" alt="Closed" />
+                            {% else %}
+                                &nbsp;
+                            {% endif %}
+                        </td>
+                        <td class="delete">
+                            <a href="{{ path('PrismPollBundle_backend_poll_delete', { pollId: poll.id }) }}"><img src="{{ asset('bundles/prismpoll/images/delete.png') }}" width="10" height="10" alt="Delete" /></a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <script type="text/javascript">
+        $('.delete a').click(function(){
+            return confirm("Are you sure you want to delete this poll?");
+        });
+    </script>
 {% endblock %}

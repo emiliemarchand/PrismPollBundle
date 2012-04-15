@@ -4,6 +4,7 @@ namespace Prism\PollBundle\Controller\Backend;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 
 use Prism\PollBundle\Form\PollType;
 
@@ -37,11 +38,11 @@ class PollController extends Controller
     }
 
     /**
-     * Edit or add a new Poll
+     * Edit or add a new poll
      *
      * @param Poll $pollId
      *
-     * @return Response
+     * @return Response|RedirectReponse
      */
     public function editAction($pollId)
     {
@@ -60,9 +61,14 @@ class PollController extends Controller
             $form->bindRequest($this->getRequest());
 
             if ($form->isValid()) {
+
                 $em = $this->getDoctrine()->getEntityManager();
                 $em->persist($poll);
                 $em->flush();
+
+                $this->get('session')->setFlash('success', "The poll has been successfully saved!");
+
+                return $this->redirect($this->generateUrl('PrismPollBundle_backend_poll_edit', array('pollId' => $poll->getId())));
             }
         }
 
@@ -70,5 +76,31 @@ class PollController extends Controller
             'poll' => $poll,
             'form' => $form->createView()
         ));
+    }
+
+    /**
+     * Delete a poll
+     *
+     * @param Poll $pollId
+     *
+     * @return RedirectReponse
+     */
+    public function deleteAction($pollId)
+    {
+        $this->init();
+
+        $poll = $this->pollEntityRepository->find($pollId);
+
+        if (!$poll) {
+            throw $this->createNotFoundException("This poll doesn't exist.");
+        }
+
+        $em = $this->getDoctrine()->getEntityManager();
+        $em->remove($poll);
+        $em->flush();
+
+        $this->get('session')->setFlash('success', "The poll has been successfully deleted!");
+
+        return $this->redirect($this->generateUrl('PrismPollBundle_backend_poll_list'));
     }
 }

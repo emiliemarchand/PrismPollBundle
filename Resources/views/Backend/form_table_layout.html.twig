@@ -1,0 +1,31 @@
+{% extends 'form_table_layout.html.twig' %}
+
+{% block field_row %}
+    <tr>
+        <th{% if errors|length > 0 %} class="error"{% endif %}>
+            {{ form_label(form, label|default(null)) }}
+        </th>
+        <td>
+            {{ form_widget(form) }}
+            {% if errors|length > 0 %}
+                <div class="error">
+                    {{ form_errors(form) }}
+                </div>
+            {% endif %}
+        </td>
+    </tr>
+{% endblock %}
+
+{% block field_label %}
+    {{ parent() }}:
+{% endblock %}
+
+{% block field_errors %}
+    {% if errors|length > 0 %}
+        <ul class="error">
+            {% for error in errors %}
+                <li>{{ error.messageTemplate|trans(error.messageParameters, 'validators') }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+{% endblock %}

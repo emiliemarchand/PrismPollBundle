@@ -1,39 +1,58 @@
 {% extends 'PrismPollBundle:Backend:layout.html.twig' %}
+{% form_theme form 'PrismPollBundle:Backend:form_table_layout.html.twig' %}
 
 {% block content %}
-    <h1>{{ poll }}</h1>
+    <div id="edit_poll">
 
-    <a href="{{ path('PrismPollBundle_backend_poll_list') }}">Back to the list</a><br /><br />
+        <a href="{{ path('PrismPollBundle_backend_poll_list') }}" id="back">Back to the list</a>
+        <h1>{{ poll }}</h1>
 
-    <form action="{{ path('PrismPollBundle_backend_poll_edit', {'pollId': poll.id }) }}" method="post" novalidate="novalidate" {{ form_enctype(form) }}>
+        {% if app.session.getFlash('success') %}
+            <div id="success">
+                {{ app.session.getFlash('success') }}
+            </div>
+        {% endif %}
 
-        <table cellspacing="0">
-            {{ form_row(form.name) }}
-            {{ form_row(form.published) }}
-            {{ form_row(form.closed) }}
+        <form action="{{ path('PrismPollBundle_backend_poll_edit', {'pollId': poll.id }) }}" method="post" novalidate="novalidate" {{ form_enctype(form) }}>
 
-            <tr>
-                <td>Choices:</td>
-                <td>
-                    <ul id="opinions" data-prototype="{{ form_widget(form.opinions.get('prototype')) | e }}">
-                        {% for opinion in form.opinions %}
-                            <li>
-                                {{ form_row(opinion.name) }}
-                                <a href="#" class="delete_choice">Delete this choice</a>
-                            </li>
-                        {% endfor %}
-                    </ul>
+            <table cellspacing="0">
+                {{ form_row(form.name) }}
+                {{ form_row(form.published) }}
+                {{ form_row(form.closed) }}
 
-                    <a href="#" id="add_choice">Add a choice</a>
-                </td>
-            </tr>
-    
-            {{ form_row(form._token) }}
-        </table>
+                <tr>
+                    <th>Choices:</th>
+                    <td>
+                        <table id="opinions" data-prototype="{% filter escape %}{{ _self.opinionPrototype(form.opinions.get('prototype')) }}{% endfilter %}">
+                            {% for opinion in form.opinions %}
+                                <tr>
+                                    {{ _self.opinionPrototype(opinion) }}
+                                </tr>
+                            {% endfor %}
+                        </table>
 
-        <input type="submit" value="Submit" />
-    </form>
+                        <a href="#" id="add_choice">+ <span>Add Choice</span></a>
+                    </td>
+                </tr>
 
-    {% include 'PrismPollBundle:Backend/Poll:edit_js.html.twig' %}
+                {{ form_row(form._token) }}
+            </table>
+
+            <div id="submit">
+                <input type="submit" value="Submit" />
+            </div>
+        </form>
+
+        {% include 'PrismPollBundle:Backend/Poll:edit_js.html.twig' %}
+    </div>
 
 {% endblock %}
+
+{% macro opinionPrototype(opinion) %}
+    <th>{{ form_label(opinion.name) }}</th>
+    <td>
+        {{ form_widget(opinion.name) }}
+        <a href="#" class="delete_choice">Delete Choice</a>
+        {{ form_errors(opinion.name) }}
+    </td>
+{% endmacro %}

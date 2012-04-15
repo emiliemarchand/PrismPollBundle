@@ -225,7 +225,7 @@ abstract class BasePoll
      */
     public function __toString()
     {
-        if ($this->name) {
+        if ($this->id && $this->name) {
             return $this->name;
         }
 

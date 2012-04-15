@@ -5,3 +5,7 @@ PrismPollBundle_backend_poll_list:
 PrismPollBundle_backend_poll_edit:
     pattern:  /edit/{pollId}
     defaults: { _controller: PrismPollBundle:Backend\Poll:edit, pollId: 0 }
+
+PrismPollBundle_backend_poll_delete:
+    pattern:  /delete/{pollId}
+    defaults: { _controller: PrismPollBundle:Backend\Poll:delete }

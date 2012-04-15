@@ -6,18 +6,17 @@
 
     $('a.delete_choice').live('click', function(e) {
         e.preventDefault();
-        $(this).parent().remove();
+        $(this).parent().parent().remove();
     });
 
     function addChoiceForm() {
-        var collectionHolder = $('ul#opinions');
+        var collectionHolder = $('table#opinions');
         var prototype = collectionHolder.attr('data-prototype');
 
         // Replace '$$name$$' in the prototype's HTML to instead be a number based on the current collection's length.
-        var newForm = prototype.replace(/\$\$name\$\$/g, collectionHolder.children().length);
+        var newForm = prototype.replace(/\$\$name\$\$/g, collectionHolder.children().children().length);
 
-        var newFormLi = $('<li></li>').append(newForm);
-        newFormLi.append('<a href="#" class="delete_choice">Delete this choice</a>');
-        collectionHolder.append(newFormLi);
+        var newFormRow = $('<tr></tr>').append(newForm);
+        collectionHolder.append(newFormRow);
     }
 </script>

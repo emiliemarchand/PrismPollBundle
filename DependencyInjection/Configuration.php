@@ -36,6 +36,7 @@ class Configuration implements ConfigurationInterface
                     ->children()
                         ->scalarNode('poll')->defaultValue('Prism\PollBundle\Form\PollType')->end()
                         ->scalarNode('opinion')->defaultValue('Prism\PollBundle\Form\OpinionType')->end()
+                        ->scalarNode('vote')->defaultValue('Prism\PollBundle\Form\VoteType')->end()
                     ->end()
                 ->end()
             ->end();

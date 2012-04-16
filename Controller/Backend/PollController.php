@@ -6,8 +6,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 
-use Prism\PollBundle\Form\PollType;
-
 class PollController extends Controller
 {
     /**
@@ -30,7 +28,10 @@ class PollController extends Controller
     {
         $this->init(); // TODO: create a controller listener to call it automatically
 
-        $polls = $this->pollEntityRepository->findAll();
+        $polls = $this->pollEntityRepository->findBy(
+            array(),
+            array('createdAt' => 'DESC')
+        );
 
         return $this->render('PrismPollBundle:Backend\Poll:list.html.twig', array(
             'polls' => $polls

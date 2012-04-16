@@ -1,0 +1,49 @@
+{% extends 'PrismPollBundle:Frontend:layout.html.twig' %}
+
+{% block content %}
+    <div id="polls_list">
+
+        <h1>Polls List</h1>
+
+        {% if polls %}
+            <ul>
+                {% for poll in polls %}
+                    <li>
+                        <h2>{{ poll }}</h2>
+                        <div class="content">
+                            {% render 'PrismPollBundle:Frontend\\Poll:Vote' with { 'pollId': poll.id } %}
+                            <a href="#">View results</a>
+                        </div>
+                    </li>
+                {% endfor %}
+            </ul>
+
+            <script type="text/javascript">
+                $('#polls_list form').live('submit', function(e) {
+
+                    var contentDiv = $(this).parent();
+
+                    $.ajax({
+                        type: 'POST',
+                        data: $(this).serialize(),
+                        url: $(this).attr('action'),
+                        success: function(response) {
+                            contentDiv.html(response);
+                        },
+                        error: function(xhr, ajaxOptions, thrownError){
+                            if (contentDiv.children('form').children('.ajax_error').length == 0) {
+                                contentDiv.children('form').prepend('<div class="ajax_error">An error occured. Please try again later.</div>');
+                            }
+                        }
+                    });
+
+                    e.preventDefault();
+                });
+            </script>
+
+        {% else %}
+            Sorry, there are no polls at the moment.
+        {% endif %}
+    </div>
+
+{% endblock %}

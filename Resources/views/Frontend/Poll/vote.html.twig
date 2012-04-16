@@ -1,0 +1,9 @@
+<form action="{{ path('PrismPollBundle_frontend_poll_vote', {'pollId': poll.id }) }}" method="post" novalidate="novalidate" {{ form_enctype(form) }}>
+
+    {{ form_widget(form.opinions) }}
+    {{ form_errors(form.opinions) }}
+
+    {{ form_rest(form) }}
+
+    <input type="submit" value="Submit" />
+</form>

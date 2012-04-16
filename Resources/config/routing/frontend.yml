@@ -1,0 +1,9 @@
+PrismPollBundle_frontend_poll_list:
+    pattern:  /list
+    defaults: { _controller: PrismPollBundle:Frontend\Poll:list }
+
+PrismPollBundle_frontend_poll_vote:
+    pattern:  /vote/{pollId}
+    defaults: { _controller: PrismPollBundle:Frontend\Poll:vote }
+    requirements:
+        _method:  POST

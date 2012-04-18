@@ -55,7 +55,7 @@ class VoteType extends AbstractType
 
         $collectionConstraint = new Collection(array(
             'opinions' => array(
-                new NotNull(),
+                new NotNull(array('message' => "Please select a choice.")),
                 new Choice(array('choices' => array_keys($options['opinionsChoices'])))
             )
         ));

@@ -5,5 +5,7 @@ PrismPollBundle_frontend_poll_list:
 PrismPollBundle_frontend_poll_vote:
     pattern:  /vote/{pollId}
     defaults: { _controller: PrismPollBundle:Frontend\Poll:vote }
-    requirements:
-        _method:  POST
+
+PrismPollBundle_frontend_poll_results:
+    pattern:  /results/{pollId}
+    defaults: { _controller: PrismPollBundle:Frontend\Poll:results }

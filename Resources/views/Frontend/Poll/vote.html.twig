@@ -1,9 +1,13 @@
+{% form_theme form 'PrismPollBundle:Frontend:form_custom_layout.html.twig' %}
+
 <form action="{{ path('PrismPollBundle_frontend_poll_vote', {'pollId': poll.id }) }}" method="post" novalidate="novalidate" {{ form_enctype(form) }}>
 
-    {{ form_widget(form.opinions) }}
     {{ form_errors(form.opinions) }}
+    {{ form_widget(form.opinions) }}
 
     {{ form_rest(form) }}
 
     <input type="submit" value="Submit" />
 </form>
+
+<a href="{{ path('PrismPollBundle_frontend_poll_results', {'pollId': poll.id }) }}" class="see_results">View results</a>

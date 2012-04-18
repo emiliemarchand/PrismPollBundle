@@ -1,58 +1,3 @@
-body {
-	color: #333333;
-	font: 75%/140% Arial, Helvetica, sans-serif;
-	margin: 10px 0;
-    background-color: #fafafa;
-}
-
-a {
-    color: #333333;
-}
-
-a:hover {
-    color: #2188c2;
-}
-
-img {
-    border: 0;
-}
-
-#bundle_title {
-    width: 860px;
-    margin:0 auto;
-    font-weight: bold;
-    font-size: 2.5em;
-    line-height: 1.1em;
-    color: #2188c2;
-}
-
-#bundle_title span {
-    font-size: 0.583em;
-    line-height: 1.1em;
-    font-weight: normal;
-    font-style: italic;
-    color: #45a7df;
-    letter-spacing: 1px;
-}
-
-#content {
-    width: 860px;
-    box-shadow: 3px 3px 10px #c0c0c0;
-    padding: 20px;
-    margin: 10px auto 0 auto;
-    background-color: #fff;
-}
-
-h1 {
-    font-size: 1.833em;
-    line-height: 1.2em;
-    margin: 0 0 15px 0;
-    padding-bottom: 4px;
-    border-bottom: 1px solid #ddd;
-    color: #4a4a4a;
-}
-
-
 /* LIST
 ----------------------------------------*/
 a#add_new {
@@ -179,16 +124,6 @@ form .delete_choice {
 #submit {
     margin-top: 10px;
     text-align: right;
-}
-
-.error {
-    color: red;
-}
-
-ul.error {
-    list-style-type: none;
-    margin: 5px 0 0 0;
-    padding: 0;
 }
 
 #success {

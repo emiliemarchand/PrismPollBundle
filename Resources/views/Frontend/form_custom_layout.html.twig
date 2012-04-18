@@ -1,0 +1,22 @@
+{% extends 'form_table_layout.html.twig' %}
+
+{% block choice_widget %}
+    <ul {{ block('widget_container_attributes') }}>
+        {% for child in form %}
+            <li>
+                {{ form_widget(child) }}
+                {{ form_label(child) }}
+            </li>
+        {% endfor %}
+    </ul>
+{% endblock choice_widget %}
+
+{% block field_errors %}
+    {% if errors|length > 0 %}
+        <ul class="error">
+            {% for error in errors %}
+                <li>{{ error.messageTemplate|trans(error.messageParameters, 'validators') }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+{% endblock %}

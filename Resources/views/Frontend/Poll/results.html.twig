@@ -1,3 +1,5 @@
 {% for opinion in poll.opinions %}
     {{ opinion }}: {{ opinion.votes }}<br />
 {% endfor %}
+
+<a href="{{ path('PrismPollBundle_frontend_poll_vote', {'pollId': poll.id }) }}" class="see_form">Vote</a>

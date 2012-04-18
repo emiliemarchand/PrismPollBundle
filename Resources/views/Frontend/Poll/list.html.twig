@@ -12,7 +12,6 @@
                         <h2>{{ poll }}</h2>
                         <div class="content">
                             {% render 'PrismPollBundle:Frontend\\Poll:Vote' with { 'pollId': poll.id } %}
-                            <a href="#">View results</a>
                         </div>
                     </li>
                 {% endfor %}
@@ -28,17 +27,43 @@
                         data: $(this).serialize(),
                         url: $(this).attr('action'),
                         success: function(response) {
-                            contentDiv.html(response);
+                            ajaxSuccess(response, contentDiv);
                         },
-                        error: function(xhr, ajaxOptions, thrownError){
-                            if (contentDiv.children('form').children('.ajax_error').length == 0) {
-                                contentDiv.children('form').prepend('<div class="ajax_error">An error occured. Please try again later.</div>');
-                            }
+                        error: function(){
+                            ajaxError(contentDiv);
                         }
                     });
 
                     e.preventDefault();
                 });
+
+                $('a.see_results, a.see_form').live('click', function(e) {
+
+                    var contentDiv = $(this).parent();
+
+                    $.ajax({
+                        type: 'GET',
+                        url: $(this).attr('href'),
+                        success: function(response) {
+                            ajaxSuccess(response, contentDiv);
+                        },
+                        error: function(){
+                            ajaxError(contentDiv);
+                        }
+                    });
+
+                    e.preventDefault();
+                });
+
+                function ajaxSuccess(response, contentDiv) {
+                    contentDiv.html(response);
+                }
+
+                function ajaxError(contentDiv) {
+                    if (contentDiv.children('form').children('.ajax_error').length == 0) {
+                        contentDiv.children('form').prepend('<div class="ajax_error error">An error occured. Please try again later.</div>');
+                    }
+                }
             </script>
 
         {% else %}

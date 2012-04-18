@@ -1,0 +1,47 @@
+/* LIST
+----------------------------------------*/
+#polls_list ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+#polls_list > ul > li {
+    margin-bottom: 23px;
+}
+#polls_list > ul > li:last-child {
+    margin-bottom: 0;
+}
+
+#polls_list h2 {
+    font-size: 1.33em;
+    line-height: 1.2em;
+    margin: 0 0 9px 0;
+}
+
+#polls_list .content {
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #dadada;
+    background-color: #fafafa;
+}
+
+#polls_list form {
+    margin-bottom: 10px;
+}
+
+#polls_list form ul {
+    margin-bottom: 10px;
+}
+
+#polls_list form li {
+    margin-bottom: 5px;
+}
+
+.ajax_error {
+    margin-bottom: 10px;
+}
+
+
+/* RESULTS
+----------------------------------------*/

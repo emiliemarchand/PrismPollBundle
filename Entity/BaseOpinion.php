@@ -38,9 +38,14 @@ abstract class BaseOpinion
     protected $updatedAt;
 
     /**
-     * @var \Prism\PollBundle\Entity\Poll
+     * @var \Prism\PollBundle\Entity\BasePoll
      */
-    protected  $poll;
+    protected $poll;
+
+    /**
+     * @var float $votesPercentage
+     */
+    protected $votesPercentage;
 
 
     /**
@@ -183,5 +188,23 @@ abstract class BaseOpinion
         }
 
         return 'New Choice';
+    }
+
+    /**
+     * Get the votes percentage
+     *
+     * @return float
+     */
+    public function getVotesPercentage()
+    {
+        if ($this->votesPercentage) {
+            return $this->votesPercentage;
+        }
+
+        if ($this->poll->getTotalVotes() > 0) {
+            return $this->votesPercentage = round($this->votes / $this->poll->getTotalVotes() * 100);
+        }
+
+        return 0;
     }
 }

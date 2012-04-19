@@ -45,3 +45,59 @@
 
 /* RESULTS
 ----------------------------------------*/
+.results th {
+    padding: 0 70px 5px 0;
+    font-weight: normal;
+    text-align: left;
+}
+
+.results td {
+    padding-bottom: 5px;
+}
+
+.results td.sub_total {
+    font-weight: bold;
+    padding-right: 5px;
+    text-align: right;
+}
+
+.results .graph_bar {
+    width: 250px;
+    border: 1px solid #dadada;
+    padding: 2px;
+    background-color: #fff;
+}
+
+.results .fill {
+    height: 22px;
+    color: #fff;
+}
+.results .fill_color_1 {
+    background-color: #1a4cf1;
+}
+.results .fill_color_2 {
+    background-color: #db2465;
+}
+.results .fill_color_3 {
+    background-color: #19b93e;
+}
+.results .fill_color_4 {
+    background-color: #f4f700;
+}
+.results .fill_color_5 {
+    background-color: #822ab9;
+}
+.results .fill_color_6 {
+    background-color: #ff9422;
+}
+.results .fill_color_7 {
+    background-color: #0ad3eb;
+}
+.results .fill_color_8 {
+    background-color: #3b3b3b;
+}
+
+.results .total {
+    text-align: right;
+    font-weight: bold;
+}

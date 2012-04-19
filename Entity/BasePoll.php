@@ -43,10 +43,14 @@ abstract class BasePoll
     protected $updatedAt;
 
     /**
-     * @var \Prism\PollBundle\Entity\Opinion
+     * @var \Prism\PollBundle\Entity\BaseOpinion
      */
     protected $opinions;
 
+    /**
+     * @var integer $totalVotes
+     */
+    protected $totalVotes;
 
     /**
      * __construct()
@@ -230,5 +234,25 @@ abstract class BasePoll
         }
 
         return 'New Poll';
+    }
+
+    /**
+     * Get the total number of votes
+     *
+     * @return int
+     */
+    public function getTotalVotes()
+    {
+        if ($this->totalVotes) {
+            return $this->totalVotes;
+        }
+
+        $this->totalVotes = 0;
+
+        foreach ($this->opinions as $opinion) {
+            $this->totalVotes += $opinion->getVotes();
+        }
+
+        return $this->totalVotes;
     }
 }

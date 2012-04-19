@@ -1,5 +1,38 @@
-{% for opinion in poll.opinions %}
-    {{ opinion }}: {{ opinion.votes }}<br />
-{% endfor %}
-
-<a href="{{ path('PrismPollBundle_frontend_poll_vote', {'pollId': poll.id }) }}" class="see_form">Vote</a>
+<table cellspacing="0" class="results">
+    <tbody>
+        {% for opinion in poll.opinions %}
+            <tr>
+                <th>{{ opinion }}</th>
+                <td class="sub_total">
+                    {% if opinion.votes == 0 %}
+                        0
+                    {% else %}
+                        {{ opinion.votes }}
+                    {% endif %}
+                    ({{ opinion.votesPercentage }}%)
+                </td>
+                <td>
+                    <div class="graph_bar">
+                        <div class="fill fill_color_{{ loop.index  }}" style="width: {{ opinion.votesPercentage }}%">
+                            &nbsp;
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        {% endfor %}
+    </tbody>
+    <tfoot>
+        <tr>
+            <td>
+                <a href="{{ path('PrismPollBundle_frontend_poll_vote', {'pollId': poll.id }) }}" class="see_form">Vote</a>
+            </td>
+            <td colspan="2" class="total">
+                Total:
+                {% set total = poll.totalVotes  %}
+                {% transchoice total %}
+                    {0} 0 vote|{1} 1 vote|]1,Inf] %total% votes
+                {% endtranschoice %}
+            </td>
+        </tr>
+    </tfoot>
+</table>

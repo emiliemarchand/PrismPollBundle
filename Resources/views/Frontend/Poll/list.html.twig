@@ -39,7 +39,7 @@
 
                 $('a.see_results, a.see_form').live('click', function(e) {
 
-                    var contentDiv = $(this).parent();
+                    var contentDiv = $(this).parents('div.content')
 
                     $.ajax({
                         type: 'GET',

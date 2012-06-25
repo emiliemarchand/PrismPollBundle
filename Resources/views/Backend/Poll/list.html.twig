@@ -17,7 +17,7 @@
             <thead>
                 <tr>
                     <th>Name</th>
-                    <th>Nb. of votes</th>
+                    <th class="integer">Nb. of votes</th>
                     <th class="boolean">Published</th>
                     <th class="boolean">Closed</th>
                     <th class="delete">Delete</th>
@@ -29,8 +29,8 @@
                         <th>
                             <a href="{{ path('PrismPollBundle_backend_poll_edit', { pollId: poll.id }) }}">{{ poll }}</a>
                         </th>
-                        <td>
-                            TODO
+                        <td class="integer">
+                            {{ poll.totalVotes }}
                         </td>
                         <td class="boolean">
                             {% if poll.published %}

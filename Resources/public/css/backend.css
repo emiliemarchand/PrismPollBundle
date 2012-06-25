@@ -44,6 +44,7 @@ a#add_new:hover {
     border-left: 1px solid #d1e0eb;
 }
 
+#polls_list .integer,
 #polls_list .boolean,
 #polls_list .delete {
     text-align: center;

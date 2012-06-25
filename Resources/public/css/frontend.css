@@ -71,7 +71,20 @@
 .results .fill {
     height: 22px;
     color: #fff;
+    -webkit-animation: fill_animation 0.7s ease-out;
+    -moz-animation: fill_animation 0.7s ease-out;
+    animation: fill_animation 0.7s ease-out;
 }
+@-webkit-keyframes fill_animation {
+    0% { width: 0; }
+}
+@-moz-keyframes fill_animation {
+    0% { width: 0; }
+}
+@-keyframes fill_animation {
+    0% { width: 0; }
+}
+
 .results .fill_color_1 {
     background-color: #1a4cf1;
 }

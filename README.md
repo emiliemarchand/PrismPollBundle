@@ -1,4 +1,26 @@
-A simple poll bundle for symfony2. Currently under development, not usable
+A simple poll bundle for symfony2.
+
+**Features:**
+
+- List of all published polls
+- Uses Ajax for voting and showing results
+- Results displayed using bar graphs
+- Uses cookies to prevent multiple voting
+- A backend interface
+- Easily overridable
+
+**Screenshots:**
+
+- [Frontend list and results](https://github.com/emiliemarchand/PrismPollBundle/tree/master/Resources/doc/frontend.png)
+- [Backend list](https://github.com/emiliemarchand/PrismPollBundle/tree/master/Resources/doc/backend_list.png)
+- [Backend edit page](https://github.com/emiliemarchand/PrismPollBundle/tree/master/Resources/doc/backend_edit.png)
+
+**Note:** The backend doesn't come with an authentication system.
+
+**TODO:**
+
+- Functional tests
+- Composer support
 
 ## Installation
 

@@ -5,7 +5,7 @@ namespace Prism\PollBundle\Controller\Frontend;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\RedirectResponse;
-
+use Symfony\Component\HttpFoundation\Cookie;
 
 class PollController extends Controller
 {
@@ -45,7 +45,7 @@ class PollController extends Controller
      *
      * @param int $pollId
      *
-     * @return Response
+     * @return Response|RedirectResponse
      */
     public function voteAction($pollId)
     {
@@ -55,6 +55,11 @@ class PollController extends Controller
 
         if (!$poll) {
             throw $this->createNotFoundException("This poll doesn't exist or has been closed.");
+        }
+
+        // If the user has already voted, show the results
+        if ($this->hasVoted($pollId)) {
+            return $this->forward('PrismPollBundle:Frontend\Poll:results', array('pollId' => $pollId, 'hasVoted' => true));
         }
 
         $opinionsChoices = array();
@@ -80,12 +85,15 @@ class PollController extends Controller
 
                 // If the form hasn't been sent via ajax, we redirect to the list page
                 if (!$this->getRequest()->isXmlHttpRequest()) {
-                    return $this->redirect($this->generateUrl('PrismPollBundle_frontend_poll_list'));
+                    $response = new RedirectResponse($this->generateUrl('PrismPollBundle_frontend_poll_list'));
 
                 // Show the results
                 } else {
-                    return $this->forward('PrismPollBundle:Frontend\Poll:results', array('pollId' => $pollId));
+                    $response = $this->forward('PrismPollBundle:Frontend\Poll:results', array('pollId' => $pollId, 'hasVoted' => true));
                 }
+
+                $this->addVotingProtection($pollId, $response);
+                return $response;
             }
         }
 
@@ -102,7 +110,7 @@ class PollController extends Controller
      *
      * @return Response
      */
-    public function resultsAction($pollId)
+    public function resultsAction($pollId, $hasVoted = false)
     {
         $this->init();
 
@@ -113,7 +121,36 @@ class PollController extends Controller
         }
 
         return $this->render('PrismPollBundle:Frontend\Poll:results.html.twig', array(
-            'poll' => $poll
+            'poll' => $poll,
+            'hasVoted' => $hasVoted
         ));
+    }
+
+    /**
+     * Add a cookie to prevent a user from voting multiple times on the same poll
+     *
+     * @param int                       $pollId
+     * @param Response|RedirectResponse $response
+     */
+    protected function addVotingProtection($pollId, $response)
+    {
+        return $response->headers->setCookie(new Cookie('prism_poll_' . $pollId, true, time()+3600*24*365));
+    }
+
+    /**
+     * Check if the user has voted on a poll
+     *
+     * @param $pollId
+     *
+     * return bool
+     */
+    protected function hasVoted($pollId)
+    {
+        $cookies = $this->getRequest()->cookies;
+        if ($cookies->has('prism_poll_' . $pollId)) {
+            return true;
+        }
+
+        return false;
     }
 }

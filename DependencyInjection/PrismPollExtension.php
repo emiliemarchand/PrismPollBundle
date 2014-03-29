@@ -37,6 +37,7 @@ class PrismPollExtension extends Extension
                 'manyToOne' => array(
                     'fieldName' => 'poll',
                     'targetEntity' => $config['entity']['poll'],
+                    "inversedBy" => "opinions",
                     'joinColumns' => array(
                         array(
                             'name' => 'pollId',

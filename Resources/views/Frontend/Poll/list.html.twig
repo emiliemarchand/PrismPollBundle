@@ -11,7 +11,7 @@
                     <li>
                         <h2>{{ poll }}</h2>
                         <div class="content">
-                            {% render 'PrismPollBundle:Frontend\\Poll:Vote' with { 'pollId': poll.id } %}
+                            {{ render(controller('PrismPollBundle:Frontend\\Poll:Vote', { 'pollId': poll.id })) }}
                         </div>
                     </li>
                 {% endfor %}
@@ -39,7 +39,7 @@
 
                 $('a.see_results, a.see_form').live('click', function(e) {
 
-                    var contentDiv = $(this).parents('div.content')
+                    var contentDiv = $(this).parents('div.content');
 
                     $.ajax({
                         type: 'GET',

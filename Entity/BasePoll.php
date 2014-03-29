@@ -18,7 +18,7 @@ abstract class BasePoll
     protected $name;
 
     /**
-     * @var string $slug
+     * @var string
      */
     protected $slug;
 
@@ -33,12 +33,12 @@ abstract class BasePoll
     protected $closed;
 
     /**
-     * @var \Datetime $createdAt
+     * @var \DateTime
      */
     protected $createdAt;
 
     /**
-     * @var \Datetime $updatedAt
+     * @var \DateTime
      */
     protected $updatedAt;
 
@@ -74,10 +74,14 @@ abstract class BasePoll
      * Set name
      *
      * @param string $name
+     *
+     * @return BasePoll
      */
     public function setName($name)
     {
         $this->name = $name;
+
+        return $this;
     }
 
     /**
@@ -94,16 +98,20 @@ abstract class BasePoll
      * Set slug
      *
      * @param string $slug
+     *
+     * @return BasePoll
      */
     public function setSlug($slug)
     {
         $this->slug = $slug;
+
+        return $this;
     }
 
     /**
      * Get slug
      *
-     * @return string 
+     * @return string
      */
     public function getSlug()
     {
@@ -114,10 +122,14 @@ abstract class BasePoll
      * Set published
      *
      * @param boolean $published
+     *
+     * @return BasePoll
      */
     public function setPublished($published)
     {
         $this->published = $published;
+
+        return $this;
     }
 
     /**
@@ -134,10 +146,14 @@ abstract class BasePoll
      * Set closed
      *
      * @param boolean $closed
+     *
+     * @return BasePoll
      */
     public function setClosed($closed)
     {
         $this->closed = $closed;
+
+        return $this;
     }
 
     /**
@@ -153,17 +169,21 @@ abstract class BasePoll
     /**
      * Set createdAt
      *
-     * @param \Datetime $createdAt
+     * @param \DateTime $createdAt
+     *
+     * @return BasePoll
      */
     public function setCreatedAt($createdAt)
     {
         $this->createdAt = $createdAt;
+
+        return $this;
     }
 
     /**
      * Get createdAt
      *
-     * @return \Datetime
+     * @return \DateTime
      */
     public function getCreatedAt()
     {
@@ -173,17 +193,21 @@ abstract class BasePoll
     /**
      * Set updatedAt
      *
-     * @param \Datetime $updatedAt
+     * @param \DateTime $updatedAt
+     *
+     * @return BasePoll
      */
     public function setUpdatedAt($updatedAt)
     {
         $this->updatedAt = $updatedAt;
+
+        return $this;
     }
 
     /**
      * Get updatedAt
      *
-     * @return \Datetime
+     * @return \DateTime
      */
     public function getUpdatedAt()
     {
@@ -194,10 +218,25 @@ abstract class BasePoll
      * Add opinions
      *
      * @param \Prism\PollBundle\Entity\BaseOpinion $opinions
+     *
+     * @return BasePoll
      */
     public function addOpinion(\Prism\PollBundle\Entity\BaseOpinion $opinions)
     {
+        $opinions->setPoll($this);
         $this->opinions[] = $opinions;
+
+        return $this;
+    }
+
+    /**
+     * Remove opinions
+     *
+     * @param \Prism\PollBundle\Entity\BaseOpinion $opinions
+     */
+    public function removeOpinion(\Prism\PollBundle\Entity\BaseOpinion $opinions)
+    {
+        $this->opinions->removeElement($opinions);
     }
 
     /**

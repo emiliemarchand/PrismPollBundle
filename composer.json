@@ -1,0 +1,22 @@
+{
+    "name": "prism/poll-bundle",
+    "type": "symfony-bundle",
+    "description": "A simple poll bundle for symfony2",
+    "keywords": ["poll", "question", "vote"],
+    "homepage": "https://github.com/emiliemarchand/PrismPollBundle",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Emilie Marchand",
+            "email": "emilie.marchand@gmail.com"
+        }
+    ],
+    "require": {
+        "symfony/framework-standard-edition": "2.4.*",
+        "stof/doctrine-extensions-bundle": "~1.1@dev"
+    },
+    "autoload": {
+        "psr-0": { "Prism\\PollBundle": "" }
+    },
+    "target-dir": "Prism/PollBundle"
+}

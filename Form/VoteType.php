@@ -3,11 +3,11 @@
 namespace Prism\PollBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\FormBuilder;
+use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Symfony\Component\Validator\Constraints\Collection;
 use Symfony\Component\Validator\Constraints\NotNull;
 use Symfony\Component\Validator\Constraints\Choice;
-use Symfony\Component\Form\Exception\MissingOptionsException;
 
 /**
  * VoteType
@@ -17,17 +17,21 @@ class VoteType extends AbstractType
     /**
      * Build Form
      *
-     * @param FormBuilder $builder
-     * @param array       $options
+     * @param FormBuilderInterface $builder
+     * @param array                $options
      */
-    public function buildForm(FormBuilder $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
             ->add('opinions', 'choice', array(
                 'multiple' => false,
                 'expanded' => true,
-                'choices' => $options['opinionsChoices']
-            ));
+                'choices' => $options['opinionsChoices'],
+                'constraints' => array(
+                    new NotNull(array('message' => "Please select a choice.")),
+                    new Choice(array('choices' => array_keys($options['opinionsChoices'])))
+                ))
+            );
     }
 
     /**
@@ -41,28 +45,12 @@ class VoteType extends AbstractType
     }
 
     /**
-     * Get Default Options
+     * Set Default Options
      *
-     * @param array $options
-     *
-     * @return array
+     * @param OptionsResolverInterface $resolver
      */
-    public function getDefaultOptions(array $options)
+    public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
-        if (!isset($options['opinionsChoices'])) {
-            throw new MissingOptionsException("You must provide the \"opinionsChoices\" option.", $options);
-        }
-
-        $collectionConstraint = new Collection(array(
-            'opinions' => array(
-                new NotNull(array('message' => "Please select a choice.")),
-                new Choice(array('choices' => array_keys($options['opinionsChoices'])))
-            )
-        ));
-
-        return array(
-            'opinionsChoices' => $options['opinionsChoices'],
-            'validation_constraint' => $collectionConstraint
-        );
+        $resolver->setRequired(array('opinionsChoices'));
     }
 }

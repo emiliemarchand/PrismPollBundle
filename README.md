@@ -1,5 +1,13 @@
 A simple poll bundle for symfony2.
 
+---
+
+This version is for Symfony 2.4.x projects.
+
+For Symfony 2.0.x projects, you must use a [1.x](https://github.com/emiliemarchand/PrismPollBundle/tree/symfony-2.0.x) release of this bundle.
+
+---
+
 ## Features
 
 - List of all published polls
@@ -20,76 +28,49 @@ A simple poll bundle for symfony2.
 **TODO:**
 
 - Functional tests
-- Composer support
+- Rewrite "Overriding the bundle" documentation for symfony 2.4.x
 
 ## Installation
 
-### Add the bundle in the `deps` file:
-
-``` ini
-[PrismPollBundle]
-    git=http://github.com/emiliemarchand/PrismPollBundle.git
-    target=/bundles/Prism/PollBundle
-```
-
-You will also need to add DoctrineExtensions for the timestampable and sluggable features:
-
-``` ini
-[gedmo-doctrine-extensions]
-    git=git://github.com/l3pp4rd/DoctrineExtensions.git
-
-[DoctrineExtensionsBundle]
-    git=git://github.com/stof/StofDoctrineExtensionsBundle.git
-    target=/bundles/Stof/DoctrineExtensionsBundle
-```
-
-Install the vendors:
-
-``` bash
-$ bin/vendors install
-```
-
-### Configure the autoloader
-
-``` php
-<?php
-// app/autoload.php
-
-$loader->registerNamespaces(array(
-    // ...
-    'Prism'            => __DIR__.'/../vendor/bundles',
-    'Stof'             => __DIR__.'/../vendor/bundles',
-    'Gedmo'            => __DIR__.'/../vendor/gedmo-doctrine-extensions/lib',
-));
-```
-
-### Configure the kernel
-
-``` php
-<?php
-// app/AppKernel.php
-
-public function registerBundles()
-{
-    $bundles = array(
-        // ...
-        new Prism\PollBundle\PrismPollBundle(),
-        new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
-    );
+**1.** Add this to your composer.json:
+``` yml
+"require": {
+    "prism/poll-bundle": "dev-master"
 }
 ```
 
-### Import routing configuration
+**2.** Run a composer update:
+
+``` bash
+$ composer update
+```
+
+**3.** Register the bundle in ``app/AppKernel.php``:
+
+(You also need to add StofDoctrineExtensionsBundle for the timestampable and sluggable features)
+
+``` php
+$bundles = array(
+    // ...
+    new Prism\PollBundle\PrismPollBundle(),
+    new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
+);
+```
+
+**4.** Import routing:
 
 ``` yaml
 # app/config/routing.yml
 PrismPollBundle_backend:
     prefix: /poll/backend
     resource: "@PrismPollBundle/Resources/config/routing/backend.yml"
+
+PrismPollBundle_frontend:
+    prefix: /poll
+    resource: "@PrismPollBundle/Resources/config/routing/frontend.yml"
 ```
 
-
-### Add configuration for DoctrineExtensions
+**5.** Add configuration for DoctrineExtensions:
 
 ``` yaml
 # app/config/config.yml
@@ -100,7 +81,7 @@ stof_doctrine_extensions:
             sluggable: true
 ```
 
-### Generate the tables
+**6.** Generate the tables:
 
 ``` bash
 $ app/console doctrine:schema:update --force
@@ -111,4 +92,6 @@ This will create the PrismPoll and PrismPollOpinion tables
 
 ## Overriding the bundle
 
-See the [documentation](https://github.com/emiliemarchand/PrismPollBundle/blob/master/Resources/doc/overriding.md)
+TODO: rewrite the documentation for Symfony 2.4.x projects.
+
+You can still get the general idea by reading the [documentation](https://github.com/emiliemarchand/PrismPollBundle/blob/symfony-2.0.x/Resources/doc/overriding.md) for Symfony 2.0.x projects.

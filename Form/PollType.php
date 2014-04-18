@@ -3,7 +3,8 @@
 namespace Prism\PollBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\FormBuilder;
+use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
  * PollType
@@ -13,10 +14,10 @@ class PollType extends AbstractType
     /**
      * Build Form
      *
-     * @param FormBuilder $builder
-     * @param array       $options
+     * @param FormBuilderInterface $builder
+     * @param array                $options
      */
-    public function buildForm(FormBuilder $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
             ->add('name')
@@ -41,16 +42,14 @@ class PollType extends AbstractType
     }
 
     /**
-     * Get Default Options
+     * Set Default Options
      *
-     * @param array $options
-     *
-     * @return array
+     * @param OptionsResolverInterface $resolver
      */
-    public function getDefaultOptions(array $options)
+    public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
-        return array(
+        $resolver->setDefaults(array(
             'opinion_form' => 'Prism\PollBundle\Form\OpinionType',
-        );
+        ));
     }
 }

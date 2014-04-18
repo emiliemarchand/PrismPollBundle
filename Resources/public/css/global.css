@@ -17,6 +17,10 @@ img {
     border: 0;
 }
 
+table {
+    border-spacing: 0;
+}
+
 #bundle_title {
     width: 860px;
     margin:0 auto;

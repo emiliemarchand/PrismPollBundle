@@ -13,8 +13,8 @@
         var collectionHolder = $('table#opinions');
         var prototype = collectionHolder.attr('data-prototype');
 
-        // Replace '$$name$$' in the prototype's HTML to instead be a number based on the current collection's length.
-        var newForm = prototype.replace(/\$\$name\$\$/g, collectionHolder.children().children().length);
+        // Replace '__name__' in the prototype's HTML to instead be a number based on the current collection's length.
+        var newForm = prototype.replace(/__name__/g, collectionHolder.children().children().length);
 
         var newFormRow = $('<tr></tr>').append(newForm);
         collectionHolder.append(newFormRow);

@@ -7,13 +7,15 @@
 
         <a href="{{ path('PrismPollBundle_backend_poll_edit') }}" id="add_new">+ New Poll</a>
 
-        {% if app.session.getFlash('success') %}
+        {% if app.session.flashbag.has('success') %}
             <div id="success">
-                {{ app.session.getFlash('success') }}
+                {% for flashMessage in app.session.flashbag.get('success') %}
+                    {{ flashMessage }}
+                {% endfor %}
             </div>
         {% endif %}
 
-        <table id="polls" cellspacing="0">
+        <table id="polls">
             <thead>
                 <tr>
                     <th>Name</th>

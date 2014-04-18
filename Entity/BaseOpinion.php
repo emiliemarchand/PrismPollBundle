@@ -28,12 +28,12 @@ abstract class BaseOpinion
     protected $ordering;
 
     /**
-     * @var \Datetime $createdAt
+     * @var \DateTime
      */
     protected $createdAt;
 
     /**
-     * @var \Datetime $updatedAt
+     * @var \DateTime
      */
     protected $updatedAt;
 
@@ -62,10 +62,14 @@ abstract class BaseOpinion
      * Set name
      *
      * @param string $name
+     *
+     * @return $this
      */
     public function setName($name)
     {
         $this->name = $name;
+
+        return $this;
     }
 
     /**
@@ -82,10 +86,14 @@ abstract class BaseOpinion
      * Set votes
      *
      * @param integer $votes
+     *
+     * @return BaseOpinion
      */
     public function setVotes($votes)
     {
         $this->votes = $votes;
+
+        return $this;
     }
 
     /**
@@ -102,10 +110,14 @@ abstract class BaseOpinion
      * Set ordering
      *
      * @param integer $ordering
+     *
+     * @return BaseOpinion
      */
     public function setOrdering($ordering)
     {
         $this->ordering = $ordering;
+
+        return $this;
     }
 
     /**
@@ -121,17 +133,21 @@ abstract class BaseOpinion
     /**
      * Set createdAt
      *
-     * @param \Datetime $createdAt
+     * @param \DateTime $createdAt
+     *
+     * @return BaseOpinion
      */
     public function setCreatedAt($createdAt)
     {
         $this->createdAt = $createdAt;
+
+        return $this;
     }
 
     /**
      * Get createdAt
      *
-     * @return \Datetime
+     * @return \DateTime
      */
     public function getCreatedAt()
     {
@@ -141,17 +157,21 @@ abstract class BaseOpinion
     /**
      * Set updatedAt
      *
-     * @param \Datetime $updatedAt
+     * @param \DateTime $updatedAt
+     *
+     * @return BaseOpinion
      */
     public function setUpdatedAt($updatedAt)
     {
         $this->updatedAt = $updatedAt;
+
+        return $this;
     }
 
     /**
      * Get updatedAt
      *
-     * @return \Datetime
+     * @return \DateTime
      */
     public function getUpdatedAt()
     {

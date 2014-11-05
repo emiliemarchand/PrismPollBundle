@@ -151,7 +151,6 @@ class PollController extends Controller
      */
     protected function hasVoted(Request $request, $pollId)
     {
-        return false;
         $cookies = $request->cookies;
         if ($cookies->has('prism_poll_' . $pollId)) {
             return true;

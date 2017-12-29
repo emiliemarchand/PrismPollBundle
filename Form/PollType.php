@@ -50,6 +50,7 @@ class PollType extends AbstractType
     {
         $resolver->setDefaults(array(
             'opinion_form' => 'Prism\PollBundle\Form\OpinionType',
+            'cascade_validation' => true
         ));
     }
 }
